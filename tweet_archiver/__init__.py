@@ -39,12 +39,17 @@ def main():
 
     for line in status_ids:
         line = line.strip()
-        status = tweepy.api.get_status(line)
+        try:
+            status = tweepy.api.get_status(line)
+        except tweepy.error.TweepError, e:
+            if 'Rate limit exceeded' not in e.msg:
+                raise
+        else:
+            jsoncontents.write(status.json + "\n")
+            i += 1
+            if int((float(i) / float(len(status_ids)) * 100.0)) > int((float(i - 1) / float(len(status_ids)) * 100.0)):
+                print '%d%% complete' % (int((float(i) / float(len(status_ids)) * 100.0)), )
         time.sleep(25) # 150 an hour
-        jsoncontents.write(status.json + "\n")
-        i += 1
-        if int((float(i) / float(len(status_ids)) * 100.0)) > int((float(i - 1) / float(len(status_ids)) * 100.0)):
-            print '%d%% complete' % (int((float(i) / float(len(status_ids)) * 100.0)), )
    
     jsoncontents.close() 
 
