@@ -42,8 +42,8 @@ def main():
         try:
             status = tweepy.api.get_status(line)
         except tweepy.error.TweepError, e:
-            if 'Rate limit exceeded' not in e.msg:
-                raise
+            if 'Rate limit exceeded' not in e.message:
+                print line, e.message
         else:
             jsoncontents.write(status.json + "\n")
             i += 1
