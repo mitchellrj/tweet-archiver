@@ -11,7 +11,7 @@ if sys.version_info < (2, 6):
 
 setup(
     name = 'tweet-archiver',
-    version = '0.1',
+    version = '0.2',
     author = 'Alex Muller',
     author_email = 'alex@mullr.net',
     description = 'Get full Tweet metadata given a list of status IDs.',
